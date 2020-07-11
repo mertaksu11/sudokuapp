@@ -59,11 +59,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12196}
     - Class: 114
+      Script: {instanceID: 12894}
+    - Class: 114
+      Script: {instanceID: 13238}
+    - Class: 114
+      Script: {instanceID: 13550}
+    - Class: 114
       Script: {instanceID: 13650}
     - Class: 114
-      Script: {instanceID: 14260}
+      Script: {instanceID: 14212}
     - Class: 114
-      Script: {instanceID: 118354}
+      Script: {instanceID: 14262}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -128,7 +134,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13924}
     - Class: 114
-      Script: {instanceID: 14260}
+      Script: {instanceID: 14262}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -280,7 +286,7 @@ ScriptsOnlyBuild:
     className: AnimationTrack
   - hash:
       serializedVersion: 2
-      Hash: b74ff7dbb259ef5814c715404134aa47
+      Hash: 5de0c014e12f220fdf1ea16c59bedd2c
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CalculateScript
@@ -586,6 +592,12 @@ ScriptsOnlyBuild:
     className: TestRunCallbackListener
   - hash:
       serializedVersion: 2
+      Hash: 1d2800c8608d2726c6d697d29d31cb83
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: SolutionScript
+  - hash:
+      serializedVersion: 2
       Hash: 4ef0f7d42cdb13479386e1f049c315aa
     assemblyName: UnityEngine.TestRunner.dll
     namespaceName: UnityEngine.TestTools.TestRunner
@@ -632,14 +644,8 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
-  - hash:
-      serializedVersion: 2
-      Hash: 1d2800c8608d2726c6d697d29d31cb83
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: SolutionScript
   platform: 13
   scenePathNames:
   - Assets/Scenes/SudokuScene.unity
   - Assets/Scenes/SolutionScene.unity
-  playerPath: C:/Users/merta/Davay/appv.2.apk
+  playerPath: C:/Users/merta/Desktop/GitHub/sudokuapp/Davay/appv.3.apk

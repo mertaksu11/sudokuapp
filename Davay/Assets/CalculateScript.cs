@@ -4,13 +4,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class CalculateScript : MonoBehaviour {
-    
-	public GameObject textDisplay;
+
+	public TextMeshProUGUI tmpDisplay;
 	public GameObject[] inputFields;
 	
 	public static List<List<int>> board;
+	public static List<List<int>> givenNumbers;
 	
 	// Function that prints out the given 9x9 sudoku grid //////////
 	////////////////////////////////////////////////////////////////
@@ -105,20 +107,15 @@ public class CalculateScript : MonoBehaviour {
 		foreach(GameObject inpF in inputFields){
 			
 			if(inpF.GetComponent<Text>().text == ""){
-				
-				// Debug.Log("empty input!");
 				innerList.Add(0);
 			}
 			else{
 				
 				int number = 0;
 				if(Int32.TryParse(inpF.GetComponent<Text>().text, out number)){
-					
-					// Debug.Log(number);
 					innerList.Add(number);
 				}
 				else{
-					// Debug.Log("non-integer input!");
 					innerList.Add(0);
 				}
 			}
@@ -139,24 +136,78 @@ public class CalculateScript : MonoBehaviour {
 		return numbers;
 	}
 	//////////////////////////////////////////////////////////////////////////////////////
+
+	// Function that returns matrix whose elements are 1 if index is given by user and 0 if not. /////
+	//////////////////////////////////////////////////////////////////////////////////////////////////
+	public List<List<int>> getGivenNumbersIndexes(){
+		
+		List<List<int>> indices = new List<List<int>>();
+		List<int> innerList = new List<int>();
+		
+		for(int i=0; i<9; i++){
+			for(int j=0; j<9; j++){
+				innerList.Add(0);
+			}
+			indices.Add(innerList);
+			innerList = new List<int>();
+		}
+
+		int ctr = 0;
+		foreach(GameObject inpF in inputFields){
+			int n;
+			if( (inpF.GetComponent<Text>().text != "") && (Int32.TryParse(inpF.GetComponent<Text>().text, out n)) ){
+
+				indices[ctr/9][ctr%9] = 1;
+			}
+			ctr++;
+		}
+		return indices;
+	}
+	//////////////////////////////////////////////////////////////////////////////////////////////////
+
+	// Function that checks if given board is a legit sudoku problem //////////
+	///////////////////////////////////////////////////////////////////////////
+	public bool isLegit(List<List<int>> grid){
+
+		for(int i=0; i<9; i++){
+			for(int j = 0; j<9; j++){
+				
+				if(grid[i][j] != 0){
+					
+					int temp = grid[i][j];
+					grid[i][j] = 0;
+					
+					if(!isPossible(grid, i, j, temp)){
+						
+						grid[i][j] = temp;
+						return false;
+					}
+					else{
+						
+						grid[i][j] = temp;
+					}
+				}
+			}
+		}
+		return true;
+	}
+	///////////////////////////////////////////////////////////////////////////
 	
-	public void fillGrid(List<List<int>> grid){
+	public void main(){
 		
-		
+		givenNumbers = getGivenNumbersIndexes();
+		board = getGrid();
+		if(isLegit(board)){
+			play(board);
+			SceneManager.LoadScene("SolutionScene");
+		}
+		else{
+			tmpDisplay.GetComponent<TextMeshProUGUI>().text = "Invalid Input!";
+		}
 	}
 	
-	public void getNumber(){
-		
-		board = getGrid();
-		printGrid(board);
-		play(board);
-		printGrid(board);
-
-		SceneManager.LoadScene("SolutionScene");
-		
-		textDisplay.GetComponent<Text>().text = "Hello, World!";
-		
-		Debug.Log("end of function!");
+	public void clearGrid(){
+		SceneManager.LoadScene("SudokuScene");
 	}
 	
 }
